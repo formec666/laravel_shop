@@ -99,7 +99,7 @@ class StorageController extends Controller
         $expenseData=[
             'description'=>$formdata['description'],
             'amount'=>$formdata['price'],
-            'user'=>Auth()->user()->id
+            'user_id'=>Auth()->user()->id
         ];
 
         $expense->create($expenseData);
