@@ -1,0 +1,15 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class StorageSpace extends Model
+{
+    use HasFactory;
+
+    function contains(){
+        return $this->hasMany(Storage::class);
+    }
+}
