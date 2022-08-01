@@ -15,7 +15,7 @@ class CreateStorageTable extends Migration
     {
         Schema::create('storages', function (Blueprint $table) {
             $table->foreignId('item_id')->references('id')->on('items');
-            $table->foreignId('storage_space_id')->references('id')->on('storage_spaces');
+            $table->foreignId('in')->references('id')->on('storage_spaces');
             $table->integer('amount');
             $table->timestamps();
         });
