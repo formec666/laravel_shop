@@ -115,3 +115,7 @@ Route::get('/admin/storage/stockup/{item}', [StorageController::class, 'viewStoc
 Route::post('/admin/storage/stockup/{item}', [StorageController::class, 'saveStockUp'])->middleware('admin');
 
 Route::post('/admin/storage/add', [StorageController::class, 'storeItem'])->middleware('admin');
+
+Route::get('/admin/storage/writeoff/{item}', [StorageController::class, 'writeOff'])->middleware('admin');
+
+Route::post('/admin/storage/writeoff/{item}', [StorageController::class, 'remove'])->middleware('admin');

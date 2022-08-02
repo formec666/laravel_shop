@@ -67,16 +67,14 @@ Sklad
                     <td
                         class="px-4 py-8 border-t border-b border-gray-300 text-lg"
                     >
-                        <form method="POST" action="/admin/storage/spaces/{{$item['id']}}">
-                            @csrf
-                            @method('delete')
+                        <a href="/admin/storage/writeoff/{{$item->id}}"
                             <button class="text-red-600">
                                 <i
                                     class="fa-solid fa-trash-can"
                                 ></i>
-                                Delete
+                                Odepsat
                             </button>
-                        </form>
+                        </a>
                     </td>
                 </tr>
         @endforeach

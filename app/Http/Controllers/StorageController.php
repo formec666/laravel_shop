@@ -6,6 +6,7 @@ use App\Models\Item;
 use App\Models\Expense;
 use App\Models\Storage;
 use App\Models\StorageSpace;
+use App\Models\Writeoff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Validation\Rule;
@@ -120,6 +121,38 @@ class StorageController extends Controller
             $storage->storageSpace;
         }
         return view('admin.storage.item', ['item'=>$item]);
+    }
+
+    public function writeOff(Item $item){
+        $storages=$item->isStored;
+        //$storageSpaces=[];
+        foreach($storages as $storage){
+            $storage->storageSpace;
+        }
+
+        return view('admin.storage.writeoff', ['item'=>$item, 'storageSpaces'=>$item->storageSpaces(), ]);
+    }
+
+    public function remove(Item $item, Writeoff $writeoff,Storage $storage){
+        $formdata=request()->validate([
+            'amount'=>'required|numeric',
+            'storage_space_id'=>'required',
+            'description'=>'required'
+        ]);
+        $writeoffData=[
+            'amount'=>$formdata['amount'],
+            'storage_space_id'=>$formdata['storage_space_id'],
+            'description'=>$formdata['description'],
+            'user_id'=>Auth()->user()->id,
+            'item_id'=>$item->id
+        ];
+        $writeoff->create($writeoffData);
+        $total=$item->total-$formdata['amount'];
+        $item->update(['total'=>$total]);
+        $storage=$storage->where('item_id', $item->id)->where('in', $formdata['storage_space_id'])->first();
+        $storage->amount=$storage->amount-$formdata['amount'];
+        $storage->save();
+        return redirect('/admin/storage')->with('message', 'Položka byla odepsána');
     }
 
 }
