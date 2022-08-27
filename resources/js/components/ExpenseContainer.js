@@ -49,9 +49,9 @@ function ExpenseContainer(props){
     
     
     if(isLoading==true){
-        return <>
+        return <div className='flex justify-center p-6 w-full'>
             <i className='fa fa-spinner fa-6x fa-spin '></i>
-        </>;
+        </div>;
     }
     return(
         <>
