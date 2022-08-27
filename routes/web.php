@@ -1,17 +1,19 @@
 <?php
 
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\CartController;
-use App\Http\Controllers\OrderController;
-use App\Http\Controllers\ProductsController;
-use App\Http\Controllers\StorageController;
-use App\Http\Controllers\UserController;
 use App\Models\User;
 use App\Models\Product;
 use GuzzleHttp\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\CartController;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ExpenseController;
+use App\Http\Controllers\StorageController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -119,3 +121,15 @@ Route::post('/admin/storage/add', [StorageController::class, 'storeItem'])->midd
 Route::get('/admin/storage/writeoff/{item}', [StorageController::class, 'writeOff'])->middleware('admin');
 
 Route::post('/admin/storage/writeoff/{item}', [StorageController::class, 'remove'])->middleware('admin');
+
+Route::get('/admin/expenses', [ExpenseController::class, 'view'])->middleware('admin');
+
+Route::get('/admin/expenses/filters', [ExpenseController::class, 'filters'])->middleware('admin');
+
+Route::post('/admin/expenses/api', [ExpenseController::class, 'get'])->middleware('admin');
+
+Route::post('/admin/expenses/update/{expense}', [ExpenseController::class, 'update'])->middleware('admin');
+
+Route::get('/show-pdf/{id}', function($id) {
+    $url = Storage::url($id);
+    return redirect($url);});
