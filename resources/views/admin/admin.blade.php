@@ -37,7 +37,11 @@
     'uri'=>'storage',
     'bg'=>'bg-amber-200',
     'icon'=>'fa fa-cubes fa-6x'
-]];
+], [
+    'name'=>'Pokladní výdaje',
+    'uri'=>'expenses',
+    'bg'=>'bg-orange-400',
+    'icon'=>'fa fa-cubes fa-6x']];
 
 //$sites=file_get_contents('http://127.0.0.1:8000/admin/getSites');
 @endphp

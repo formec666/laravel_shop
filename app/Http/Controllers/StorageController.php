@@ -69,13 +69,9 @@ class StorageController extends Controller
             'price'=>['required', 'numeric'],
             'amount'=>'required|numeric',
             'storage'=>'required',
-            'description'=>'required'
-        ]);
+            'description'=>'required',
 
-        if($request->hasFile('document')) {
-            $formFields['document'] = $request->file('document')->store('documents', 'public');
-        }
-        //dd($formdata);
+        ]);        
 
         $total=$item['total']+$formdata['amount'];
         
@@ -102,6 +98,12 @@ class StorageController extends Controller
             'amount'=>$formdata['price'],
             'user_id'=>Auth()->user()->id
         ];
+        
+        if($request->hasFile('document')) {
+            $expenseData['document'] = $request->file('document')->store('documents', 'public');            
+        }
+
+        //dd($expenseData);
 
         $expense->create($expenseData);
 
