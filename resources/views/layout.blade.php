@@ -91,9 +91,9 @@
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
         <a
-            href="create.html"
+            href="/login"
             class=" bg-black text-white py-2 px-5"
-            >Post Job</a
+            >Log In</a
         >
     </footer>
     <x-flash-message />

@@ -26,7 +26,7 @@ class AddTakenToOrders extends Migration
     public function down()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('taken_by');//
+            $table->dropConstrainedForeignId('taken_by');//
         });
     }
 }

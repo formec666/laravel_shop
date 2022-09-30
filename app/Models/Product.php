@@ -20,4 +20,11 @@ class Product extends Model
         }
 
     }
+
+    public function item(){
+        //if($this->item_id != 0){
+          return $this->belongsTo(Item::class);  
+        //}
+        
+    }
 }

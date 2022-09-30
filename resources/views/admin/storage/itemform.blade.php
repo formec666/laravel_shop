@@ -49,7 +49,17 @@
       @enderror
     </div>
 
-    
+    <div class="mb-6">
+      <label for="through" class="inline-block text-lg mb-2">
+        Automatická výroba- položku není třeba vyrábět, při výrobě která má v receptu tuto položku se automaticky odečtou všechny položky ze kterých se tato vyrábí
+      </label>
+      <input type="checkbox" class="border border-gray-200 rounded p-2 w-full" name="through"
+        placeholder="Example: OBI, Amazon.com " value="{{old('distributor')}}"/>
+
+      @error('through')
+      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+      @enderror
+    </div>
 
     <div class="mb-6">
       <label for="description" class="inline-block text-lg mb-2">

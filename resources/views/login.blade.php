@@ -12,7 +12,7 @@ Login
     <p class="mb-4">Log into your account to post gigs</p>
   </header>
 
-  <form method="POST" action="/authenticate">
+  <form method="POST" action="/authenticate" class="p-6">
     @csrf
 
     <div class="mb-6">

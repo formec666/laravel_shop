@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Item;
 use Illuminate\Http\Request;
 
 class ProductsController extends Controller
@@ -13,11 +14,20 @@ class ProductsController extends Controller
         );
     }//
     public function viewEdit($id){
-        return response(view('admin.edit', ['listing'=>Product::find($id)]));
+        $product=Product::find($id);
+        $storage=[];
+        $items=Item::all();
+        foreach($items as $item){
+        foreach($item->isStored as $isStored){
+            $isStored->storageSpace;
+        }}
+        
+        //dd($items);
+        return response(view('admin.edit', ['listing'=>$product, 'items'=>$items]));
     }
 
     public function add(){
-        return response(view('admin.add'));
+        return response(view('admin.add', ['items'=>Item::all()]));
     }
 
     public function edit(Request $request, Product $product){
@@ -26,6 +36,7 @@ class ProductsController extends Controller
             'tags' => [],
             'description' => 'required',
             'price' => 'required|numeric',
+            'item_id'=>'numeric'
             
         ]);
 
@@ -44,6 +55,7 @@ class ProductsController extends Controller
             'tags' => [],
             'description' => 'required',
             'price' => 'required|numeric',
+            'item_id'=>'numeric'
             
         ]);
 

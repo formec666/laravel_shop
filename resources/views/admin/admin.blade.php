@@ -41,7 +41,18 @@
     'name'=>'Pokladní výdaje',
     'uri'=>'expenses',
     'bg'=>'bg-orange-400',
-    'icon'=>'fa fa-cubes fa-6x']];
+    'icon'=>'fa fa-cubes fa-6x'
+],[
+    'name'=>'Pokladna',
+    'uri'=>'counter',
+    'bg'=> 'bg-lime-700',
+    'icon'=>'fa fa-calculator fa-6x'
+],[
+    'name'=>'Výroba',
+    'uri'=>'fabrication',
+    'bg'=>'bg-emerald-400',
+    'icon'=>'fa fa-industry fa-6x'
+]];
 
 //$sites=file_get_contents('http://127.0.0.1:8000/admin/getSites');
 @endphp

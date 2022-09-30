@@ -18,7 +18,8 @@ class ProductFactory extends Factory
             'description'=>$this->faker->paragraph(5),
             'price'=>$this->faker->numberBetween(100, 250),
             'image'=>'/images/2.jpg',
-            'tags'=>'blue, apple, sauce'
+            'tags'=>'blue, apple, sauce',
+            'item_id'=>1
         ];
     }
 }

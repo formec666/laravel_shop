@@ -11,9 +11,14 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\OrderController;
+use App\Http\Controllers\CounterController;
 use App\Http\Controllers\ExpenseController;
 use App\Http\Controllers\StorageController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\RecipeController;
+use App\Models\Item;
+use App\Models\Recipe;
+use Illuminate\Support\Facades\Redirect;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,11 +32,21 @@ use App\Http\Controllers\ProductsController;
 */
 
 Route::get('/', function (Request $request) {
-    return view('shop',['products' => Product::latest()->filter(request(['tags', 'search']))->paginate(6)]);
+    $products=Product::latest()->filter(request(['tags', 'search']))->paginate(6);
+    foreach($products as $product){
+        $product['available']=StorageController::getTotal($product->item);
+    }
+    //dd($product);
+    return view('shop',['products' => $products]);
 });
 
 Route::get('/hello', function(){
+    dd(Item::find(3)->pivotedRecipes);
     return response('Hello World');
+});
+
+Route::get('/products/counter', function (Request $request) {
+    return response()->json(['products'=>Product::all()]);
 });
 
 Route::get('/products/edit/{id}', [ProductsController::class, 'viewEdit'])->where('id', '[0-9]+');
@@ -133,3 +148,29 @@ Route::post('/admin/expenses/update/{expense}', [ExpenseController::class, 'upda
 Route::get('/show-pdf/{id}', function($id) {
     $url = Storage::url($id);
     return redirect($url);});
+
+Route::get('/admin/counter', [CounterController::class, 'show'])->middleware('admin');
+
+Route::post('/admin/counter', [CounterController::class, 'storeCheck'])->middleware('admin');
+
+Route::get('/admin/checks', [CounterController::class, 'checks'])->middleware('admin');
+
+Route::get('/admin/fabrication', [RecipeController::class, 'showAll'])->middleware('admin');
+
+Route::get('/admin/fabrication/new', [RecipeController::class, 'new'])->middleware('admin');
+
+Route::get('/admin/fabrication/{item}', [RecipeController::class, 'showItem'])->middleware('admin');
+
+Route::get('/admin/fabrication/move/{item}', [RecipeController::class, 'move'])->middleware('admin');
+
+Route::post('/admin/fabrication/{item}', [RecipeController::class, 'fabricate'])->middleware('admin');
+
+Route::post('/admin/fabrication/', [RecipeController::class, 'store'])->middleware('admin');
+
+Route::get('/admin/fabrication/edit/{item}', [RecipeController::class, 'editation'])->middleware('admin');
+
+Route::delete('/admin/fabrication/edit/{recipe}', [RecipeController::class, function(Recipe $recipe){
+    $recipe->delete();
+    return Redirect::back()->with('message', 'previdlo receptu odstraněno');
+}])->middleware('admin');
+
