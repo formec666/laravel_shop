@@ -61,4 +61,7 @@ class User extends Authenticatable
     function archived(){
         return $this->hasMany(orderArchive::class);
     }
+    function checks(){
+        return $this->hasMany(Check::class);
+    }
 }

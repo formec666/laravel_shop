@@ -73,8 +73,7 @@ E-shop
                     @endforeach
                 </ul>
                 <div class="text-lg mt-4">
-                    <i class="fa-solid fa-location-dot"></i> Boston,
-                    MA
+                    <i class="fa-solid fa-location-dot"></i> {{$product->available}}
                 </div>
             </div></a>
         </div>

@@ -14,4 +14,11 @@ class Item extends Model
     function storageSpaces(){
         return $this->hasManyThrough(StorageSpace::class, Storage::class, '');
     }
+
+    public function recipes(){
+        return $this->hasMany(Recipe::class, 'output', 'id');
+    }
+    public function pivotedRecipes(){
+        return $this->belongsToMany(Item::class, 'recipes', 'output', 'input')->withPivot('amount', 'id', 'from');
+    }
 }

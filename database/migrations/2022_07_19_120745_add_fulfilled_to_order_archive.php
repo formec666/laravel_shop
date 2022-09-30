@@ -13,8 +13,9 @@ class AddFulfilledToOrderArchive extends Migration
      */
     public function up()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::table('order_archive', function (Blueprint $table) {
-            $table->foreignId('archived_by')->nullable()->references('id')->on('users');//
+            $table->foreignId('archived_by')->nullable()->references('id')->on('users')->onDelete('cascade');//
         });
     }
 
@@ -25,8 +26,9 @@ class AddFulfilledToOrderArchive extends Migration
      */
     public function down()
     {
+        Schema::disableForeignKeyConstraints();
         Schema::table('order_archive', function (Blueprint $table) {
-            $table->dropColumn('archived_by');//
+            $table->dropConstrainedForeignId('archived_by');//
         });
     }
 }

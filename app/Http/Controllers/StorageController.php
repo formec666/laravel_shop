@@ -14,8 +14,23 @@ use Illuminate\Validation\Rules\Unique;
 
 class StorageController extends Controller
 {
+    public function getTotal($item){
+        if($item==null){
+            return 'Dostupnost neznámá';
+        }
+        $total=0;
+        foreach($item->isStored as $storage){
+            $total += $storage -> amount;
+        }
+        return $total;
+    }
+
     public function mainStorage(){
-        return view('admin.storage.main', ['items'=>Item::all()]);
+        $items=Item::all();
+        foreach($items as $item){
+            $item->total=StorageController::getTotal($item);
+        }
+        return view('admin.storage.main', ['items'=>$items]);
     }
 
     public function spaces(){
@@ -58,8 +73,12 @@ class StorageController extends Controller
             'distributor'=>'required',
             'description'=>'required'
         ]);
+        if($request->has('through')){
+            $formdata['through']=true;
+        }
 
-        $item->create($formdata);
+        $item=$item->create($formdata);
+        Storage::create(['amount'=>0, 'in'=>1, 'item_id'=>$item->id]);
 
         return redirect('/admin/storage')->with('message', 'Položka vytvořena na skladě');
     }
@@ -79,19 +98,9 @@ class StorageController extends Controller
         'in'=>$formdata['storage'],
         'amount'=>$formdata['amount']];
 
-        if(!$storage->where('item_id', $stockup['item_id'])->where('in', $stockup['in'])->exists()){
-            
-            $storage->create($stockup);
-        }
-        else{
-            $storage=$storage->where('item_id', $stockup['item_id'])->where('in', $stockup['in'])->first();
-            $stockup['amount']=$storage['amount']+$stockup['amount'];
-            
-            $storage=$storage->update($stockup);
-           
-        }
+        Storage::create($stockup);
 
-        $item->update(['total'=>$total]);
+        $item->update(['total'=>StorageController::getTotal($item)]);
 
         $expenseData=[
             'description'=>$formdata['description'],
@@ -122,6 +131,17 @@ class StorageController extends Controller
         foreach($storages as $storage){
             $storage->storageSpace;
         }
+        foreach($storages as $item_value) {
+            
+            $pid = $item_value['in'];
+            if(!isset($final_array[$pid])) {
+              $final_array[$pid] = $item_value;
+            } else {
+              $final_array[$pid]['amount'] += $item_value['amount'];
+            }
+         }
+        
+         $item['isStored']=$final_array; 
         return view('admin.storage.item', ['item'=>$item]);
     }
 

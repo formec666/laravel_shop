@@ -15,3 +15,5 @@ require('./bootstrap');
 require('./components/Example');
 
 require('./components/ExpensePage');
+
+require('./components/Counter');

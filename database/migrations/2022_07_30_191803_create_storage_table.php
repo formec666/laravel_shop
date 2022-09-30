@@ -30,7 +30,7 @@ class CreateStorageTable extends Migration
     {
         
         Schema::disableForeignKeyConstraints();
-        Schema::dropIfExists('storage');
+        Schema::dropIfExists('storages');
         Schema::enableForeignKeyConstraints();
     }
 }

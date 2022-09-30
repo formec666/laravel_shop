@@ -72,6 +72,21 @@
     </div>
 
     <div class="mb-6">
+      <label for="description" class="inline-block text-lg mb-2">
+        Připojit k položce ze skladu
+      </label>
+      <select name="item_id" id="">
+        @foreach($items as $item)
+        <option value="{{$item->id}}">{{$item->name}}</option>
+        @endforeach
+      </select>
+
+      @error('item_id')
+      <p class="text-red-500 text-xs mt-1">{{$message}}</p>
+      @enderror
+    </div>
+
+    <div class="mb-6">
       <button class="bg-laravel text-white rounded py-2 px-4 hover:bg-black">
         Uložit
       </button>
