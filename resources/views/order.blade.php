@@ -69,6 +69,19 @@
                 </p>   
                 @enderror
             <input type="text" name="invoiceAddress">
+            <label>
+                <input type="radio"  name="payment_method" value="card">
+                Online
+            </label>
+            <label>
+                <input type="radio"  name="payment_method" value="Dobírka">
+                Při převzetí
+            </label>
+            @error('payment_method')
+                 <p class="text-red-500 text-xs mt-1">
+                    {{$message}}
+                </p>   
+            @enderror
             <input type="submit" value="Vytvořit objednávku">
         </form>
     </div>

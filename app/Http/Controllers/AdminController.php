@@ -22,7 +22,11 @@ class AdminController extends Controller
 
     public function orderJson(Request $request)
     {
-        return response()->json(['orders'=>Order::oldest()->filter(request(['status', 'search']))->where('taken_by', auth()->user()->id)->orWhere('taken_by', null)->get()]);
+        $orders=Order::oldest()->filter(request(['status', 'search']))->/*where('taken_by', auth()->user()->id)->*/orWhere('taken_by', null)->get();
+        foreach($orders as $order){
+            $order['payment_status']=OrderController::getOrderPayment($order->payment_method);
+        }
+        return response()->json(['orders'=>$orders]);
     }
 
     public function moveOrder(Request $request, orderArchive $orderArchive){
@@ -49,6 +53,7 @@ class AdminController extends Controller
             $orderArchive->email=$order['email'];
             $orderArchive->status=$order['id'];
             $orderArchive->archived_by=auth()->user()->id;
+            $orderArchive->payment_method=$order['payment_method'];
             $orderArchive->save();
             $order->delete();
         }

@@ -17,6 +17,7 @@ use App\Http\Controllers\StorageController;
 use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\RecipeController;
 use App\Models\Item;
+use App\Models\Order;
 use App\Models\Recipe;
 use Illuminate\Support\Facades\Redirect;
 
@@ -41,8 +42,18 @@ Route::get('/', function (Request $request) {
 });
 
 Route::get('/hello', function(){
-    dd(Item::find(3)->pivotedRecipes);
-    return response('Hello World');
+    $payment=Order::find(35)->payment_method;
+    $url=false;
+    if($payment!='Dobírka'){
+        $stripe= new \Stripe\StripeClient(env('STRIPE_KEY'));
+        $session=$stripe->checkout->sessions->retrieve($payment);
+        $payment=$session->payment_status;
+        if($session->payment_status=='unpaid'){
+            //$unpaid=true;
+            $url=$session->url;
+        }
+    }
+    return response(view('admin.mail')->with(['order'=>Order::find(35), 'payment_method'=>$payment, 'url'=>$url]));
 });
 
 Route::get('/products/counter', function (Request $request) {

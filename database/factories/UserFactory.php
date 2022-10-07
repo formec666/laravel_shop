@@ -21,6 +21,7 @@ class UserFactory extends Factory
             'isAdmin'=>true,
             'password' => '$2y$10$nAfUxD1uIbRIxE84HUM1D.bJ63m.yJ4ZVvr1VJlUgA18hkiG/gA0S', // password
             'remember_token' => Str::random(10),
+            'isAllowed'=>json_encode(['nevim'=>true])
         ];
     }
 
