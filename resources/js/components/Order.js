@@ -1,3 +1,4 @@
+import { PropaneSharp } from '@mui/icons-material';
 import { add, orderBy } from 'lodash';
 import PreviousMap from 'postcss/lib/previous-map';
 import React, { useEffect, useState } from 'react';
@@ -92,6 +93,9 @@ function Order(props){
                     
                     <div className='font-light'>Vytvořeno</div>
                     <div className='font-medium'>{props.order.created_at}</div>
+
+                    <div className='font-light'>Platba</div>
+                    <div className='font-medium' dangerouslySetInnerHTML={{ __html: props.order.payment_status }}></div>
                     
                 </div>
                 <div>{props.order.invoiceName && <><div className='font-light'>Jméno a příjmení na fakturu</div>

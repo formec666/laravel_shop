@@ -80,8 +80,28 @@
             </div>
             <div>
                 
-            <div class='font-light'>Změněno</div>
-            <div class='font-medium'>{{$order['updated_at']}}</div>
+                <div class='font-light'>Změněno</div>
+                <div class='font-medium'>{{$order['updated_at']}}</div>
+
+                <div class='font-light'>Platba</div>                
+                @php
+                    if ($order->payment_method=='Dobírka' or $order->payment_method=='post') {
+                        
+                        echo("<div class='font-medium text-black-600'>Dobírka</div>");
+                                
+                    }
+                    else {
+                        $stripe= new \Stripe\StripeClient(env('STRIPE_KEY'));
+                        switch ($stripe->checkout->sessions->retrieve($order->payment_method)->payment_status) {
+                            case 'unpaid':
+                                echo("<div class='font-medium text-red-600'>Nezaplaceno</div>");
+                                break;
+                            case 'paid':
+                                echo("<div class='font-medium text-green-600'>Zaplaceno</div>");
+                                break;
+                        }
+                    }
+                @endphp
                 
                 
             </div>

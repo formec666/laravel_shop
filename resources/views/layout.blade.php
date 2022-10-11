@@ -26,7 +26,7 @@
                 },
             };
         </script>
-        <title>Auris @yield('title')</title>
+        <title>{{env('APP_NAME')}} @yield('title')</title>
     </head>
     <body >
         <nav class="flex flex-nowrap portrait:flex-col overflow-x-auto justify-between items-center mb-4 ">
@@ -86,7 +86,7 @@
         </div>
         </main>
         <footer
-        class="  w-full flex items-center justify-start font-bold bg-laravel text-white h-24 mt-24 opacity-90 justify-evenly"
+        class="  w-full flex items-center font-bold bg-laravel text-white h-24 mt-24 opacity-90 justify-evenly"
     >
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 
