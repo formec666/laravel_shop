@@ -30,7 +30,7 @@
         {{$total}} Kč
     </div>
     <div>
-        <form class="flex flex-col" action="/order" method="POST">
+        <form class="flex-1 flex flex-col" action="/order" method="POST">
             @csrf
             <input type="hidden" name="total" value="{{$total}}">
             <input type="hidden" name="cart" value="{{json_encode($cart)}}">
@@ -40,16 +40,16 @@
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name ="name" @auth value={{auth()->user()->name}}@endauth>
+            <input type="text" name ="name" @auth value={{auth()->user()->name}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             <label for="email">Email</label>
             @error('email')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="email" name="email" @auth value={{auth()->user()->email}}@endauth>
+            <input type="email" name="email" @auth value={{auth()->user()->email}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             <label for="address">Adresa</label>
-            <input type="text" name="address" id="address">
+            <input type="text" name="address" id="address" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             @error('address')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
@@ -61,14 +61,14 @@
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name="invoiceName">
+            <input type="text" name="invoiceName" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             <label for="invoiceAddress">Fakturační adresa</label>
             @error('invoiceAddress')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name="invoiceAddress">
+            <input type="text" name="invoiceAddress" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             <label>
                 <input type="radio"  name="payment_method" value="card">
                 Online

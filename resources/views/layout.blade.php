@@ -26,7 +26,7 @@
                 },
             };
         </script>
-        <title>Auris @yield('title')</title>
+        <title>{{env('APP_NAME')}} @yield('title')</title>
     </head>
     <body >
         <nav class="flex flex-nowrap portrait:flex-col overflow-x-auto justify-between items-center mb-4 ">
