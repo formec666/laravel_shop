@@ -21,7 +21,7 @@ class RecipeController extends Controller
         return response(view('admin.fabrication.new', ['items'=>Item::all(), 'storageSpaces'=>StorageSpace::all()]));
     }
 
-    public function store(Request $request, Recipe $recipe){
+    public function store(Request $request){
         $formFields=$request->validate([
             'input'=>'required',
             'amount'=>'required|numeric',
