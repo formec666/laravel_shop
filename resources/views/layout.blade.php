@@ -20,7 +20,7 @@
                 theme: {
                     extend: {
                         colors: {
-                            laravel: "#AC9254",
+                            laravel: "#FF0000",
                         },
                     },
                 },
@@ -31,7 +31,7 @@
     <body >
         <nav class="flex flex-nowrap portrait:flex-col overflow-x-auto justify-between items-center mb-4 ">
             <a href="/ " class=" items-center"
-                ><img class="w-48" src="/img/logo.jpg" alt="" class="logo"
+                ><img class="w-48" src="/img/logo.jpeg" alt="" class="logo"
             /></a>
             <ul class="flex  landscape:space-x-6 landscape:mr-6 text-lg items-center portrait:flex-col portrait:space-y-4">
             
@@ -54,7 +54,7 @@
       <li>
         <form  method="get" action="/logout">
           @csrf
-          <button type="submit">
+          <button type="submit" class="hover:text-laravel">
             <i class="fa-solid fa-door-closed"></i> Odhlásit se
           </button>
         </form>
