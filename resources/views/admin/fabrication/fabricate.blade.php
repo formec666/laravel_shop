@@ -36,7 +36,7 @@
             <select class="border border-gray-200 rounded p-2 w-full" name="storeIn">
                 <option value="">Vyberte</option> 
                 @foreach($storageSpaces as $storageSpace)
-                    <option value="{{$storage->id}}">{{$storageSpace->name}}</option>
+                    <option value="{{$storageSpace->id}}">{{$storageSpace->name}}</option>
                 @endforeach
             </select>
             @error('storeIn')
