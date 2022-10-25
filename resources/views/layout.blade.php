@@ -28,7 +28,7 @@
         </script>
         <title>{{env('APP_NAME')}} @yield('title')</title>
     </head>
-    <body >
+    <body class="">
         <nav class="flex flex-nowrap portrait:flex-col overflow-x-auto justify-between items-center mb-4 ">
             <a href="/ " class=" items-center"
                 ><img class="w-48" src="/img/logo.jpeg" alt="" class="logo"
