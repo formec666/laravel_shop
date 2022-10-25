@@ -53,6 +53,15 @@ function TopBar(props){
                         sx={{ my: 2, color: 'white', display: 'block' }}
                     >
                         Účty
+                    </Button>
+                    <Button 
+                        sx={{ my: 2, color: 'white', display: 'block' }}
+                        onClick={()=>{
+                            props.setName();
+                            props.setId();
+                            props.setCheck([]);
+                    }}>
+                        Nový účet
                     </Button>            
                 </Box>
 
@@ -88,6 +97,11 @@ function TopBar(props){
               
                 <MenuItem onClick={()=>props.openDialog(props.setOpen)}>
                   <Typography textAlign="center">Účty</Typography>
+                </MenuItem>
+                <MenuItem onClick={()=>{props.setName();
+                    props.setId();
+                    props.setCheck([])}}>
+                  <Typography textAlign="center">Nový účet</Typography>
                 </MenuItem>
             </Menu>
           </Box>                

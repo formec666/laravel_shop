@@ -5,12 +5,12 @@
 @endphp
 
 @section('title')
- Order   
+ Objednávka   
 @endsection
 
 @section('content')
 <div class="flex flex-row justify-evenly">
-    <div class="bg-laravel p-6 border-2 border-amber-400">
+    <div class="bg-laravel  p-6 border-2 border-amber-400">
         <i class="fa-solid fa-shopping-cart"></i>
         @foreach ((array)$data as $pair)
             @foreach((array)$pair as $amount=>$details)
@@ -29,8 +29,8 @@
         <br>
         {{$total}} Kč
     </div>
-    <div>
-        <form class="flex-1 flex flex-col" action="/order" method="POST">
+    <div class="flex-auto mx-6">
+        <form class="flex-auto flex flex-col" action="/order" method="POST">
             @csrf
             <input type="hidden" name="total" value="{{$total}}">
             <input type="hidden" name="cart" value="{{json_encode($cart)}}">
@@ -69,20 +69,34 @@
                 </p>   
                 @enderror
             <input type="text" name="invoiceAddress" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
-            <label>
+            <label class="bg-gray-200 rounded-t border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mt-6">
                 <input type="radio"  name="payment_method" value="card">
-                Online
+                <div class="ml-6">
+                    <h1 class="text-xl">
+                        Online
+                    </h1>
+                    <div class="text-gray-700">
+                        Online platba kartou, Google pay, nebo Apple pay přes Stripe
+                    </div>
+                </div>
             </label>
-            <label>
+            <label class="bg-gray-200 rounded-b border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mb-6">
                 <input type="radio"  name="payment_method" value="Dobírka">
-                Při převzetí
+                <div class="ml-6">
+                    <h1 class="text-xl  ">
+                        Hotově při převzetí
+                    </h1>
+                    <div class="text-gray-700">
+                        Zaplatíte hotově
+                    </div>
+                </div>
             </label>
             @error('payment_method')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
                 </p>   
             @enderror
-            <input type="submit" value="Vytvořit objednávku">
+            <input type="submit" class="h-10 text-white rounded-lg bg-laravel hover:bg-gold" value="Vytvořit objednávku">
         </form>
     </div>
 </div>

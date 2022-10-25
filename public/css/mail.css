@@ -588,11 +588,11 @@ video {
 .h-24 {
   height: 6rem;
 }
-.h-14 {
-  height: 3.5rem;
-}
 .h-10 {
   height: 2.5rem;
+}
+.h-14 {
+  height: 3.5rem;
 }
 .min-h-screen {
   min-height: 100vh;
@@ -618,6 +618,9 @@ video {
 }
 .max-w-lg {
   max-width: 32rem;
+}
+.flex-1 {
+  flex: 1 1 0%;
 }
 .flex-grow {
   flex-grow: 1;
@@ -702,11 +705,11 @@ video {
 .rounded {
   border-radius: 0.25rem;
 }
-.rounded-xl {
-  border-radius: 0.75rem;
-}
 .rounded-lg {
   border-radius: 0.5rem;
+}
+.rounded-xl {
+  border-radius: 0.75rem;
 }
 .rounded-sm {
   border-radius: 0.125rem;

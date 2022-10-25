@@ -164,6 +164,8 @@ Route::get('/admin/counter', [CounterController::class, 'show'])->middleware('ad
 
 Route::post('/admin/counter', [CounterController::class, 'storeCheck'])->middleware('admin');
 
+Route::post('/admin/counter/checkout', [CounterController::class, 'checkout'])->middleware('admin');
+
 Route::get('/admin/checks', [CounterController::class, 'checks'])->middleware('admin');
 
 Route::get('/admin/fabrication', [RecipeController::class, 'showAll'])->middleware('admin');

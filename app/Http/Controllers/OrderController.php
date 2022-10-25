@@ -61,7 +61,9 @@ class OrderController extends Controller
                         'currency'=>'czk',
                         'unit_amount'=>$product->price*100,
                         'product_data'=>[
-                            'name'=>$product->name,                            
+                            'name'=>$product->name,
+                            'images'=>[asset('storage/'.$product->image)],
+                            'description'=>$product->description
                         ]
                     ],
                     'quantity'=>$amount
