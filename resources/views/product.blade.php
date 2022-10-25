@@ -41,7 +41,7 @@
                             <input type="number" name="amount" id="amount" class="m-6 flex flex-col text-center p-1" value="1" min="1" >
                             <button
                                     type="submit"  
-                                    class="block bg-laravel text-white  py-2 rounded-xl hover:opacity-80 p-6"
+                                    class="block bg-laravel  py-2 rounded-xl hover:opacity-80 p-6"
                                     ><i class="fa-solid fa-shopping-cart"></i>
                                     Do košíku</button>
                                     <input type="text" readonly="readonly" name="id" id="id" class="text-center bg-transparent cursor-default" value="{{$product->id}}">

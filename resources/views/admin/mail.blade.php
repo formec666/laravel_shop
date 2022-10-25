@@ -1,44 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta id ="meta_token" content="{{ csrf_token() }}" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="icon" href="images/favicon.ico" />
-        <link
-            rel="stylesheet"
-            href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-            integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-            crossorigin="anonymous"
-            referrerpolicy="no-referrer"
-        />
-        <script src="https://cdn.tailwindcss.com"></script>
-        <script src="//unpkg.com/alpinejs" defer></script>
-        <script>
-            tailwind.config = {
-                theme: {
-                    extend: {
-                        colors: {
-                            laravel: "#AC9255",
-                        },
-                    },
-                },
-            };
-        </script>
-    </head>
-<body>
-    <nav style="display: flex; 
-    overflow-x: auto; 
-    margin-bottom: 1rem; 
-    flex-wrap: nowrap; 
-    justify-content: space-between; 
-    align-items: center; ">
-    <a href="/ " style="align-items: center; ">
-        <img class="width: 48" src="/img/logo.jpg" alt="" class="logo"/>
-    </a>
-    </nav>
-    <main style=" padding:6px">
+@extends('layout')
+
+@section('content')
         <h1 style="font-size: 1.5rem; line-height: 2rem; text-align: center;">
             Vaše objednávka byla vytvořena
         </h1>
@@ -60,11 +22,9 @@
            Celková cena činní {{$order->total}} Kč
         </h2>
         @if ($url)
-            <button><a href={{$url}}> Zaplatit obědnávku</a></button>
+            <a href={{$url}} class="h-10 text-black rounded-lg bg-laravel hover:bg-gold hover:shadow-lg hover:cursor-pointer p-6" > Zaplatit obědnávku</a>
         @else
             Způsob platby: {{$payment}}
         @endif
         
-    </main>
-</body>
-</html>
+    @endsection

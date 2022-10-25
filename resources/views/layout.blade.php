@@ -20,7 +20,9 @@
                 theme: {
                     extend: {
                         colors: {
-                            laravel: "#FF0000",
+                            laravel: "#FFF176",
+                            black: "#222",
+                            accent: "#FFF200"
                         },
                     },
                 },
@@ -31,7 +33,7 @@
     <body class="">
         <nav class="flex flex-nowrap portrait:flex-col overflow-x-auto justify-between items-center mb-4 ">
             <a href="/ " class=" items-center"
-                ><img class="w-48" src="/img/logo.jpeg" alt="" class="logo"
+                ><img class="w-48 p-6" src="/img/logo.png" alt="" class="logo"
             /></a>
             <ul class="flex  landscape:space-x-6 landscape:mr-6 text-lg items-center portrait:flex-col portrait:space-y-4">
             
@@ -86,7 +88,7 @@
         </div>
         </main>
         <footer
-        class="  w-full flex items-center font-bold bg-laravel text-white h-24 mt-24 opacity-90 justify-evenly"
+        class="  w-full flex items-center font-bold bg-laravel text-black h-24 mt-24 opacity-90 justify-evenly"
     >
         <p class="ml-2">Copyright &copy; 2022, All Rights reserved</p>
 

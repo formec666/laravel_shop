@@ -10,7 +10,7 @@
 
 @section('content')
 <div class="flex flex-row justify-evenly">
-    <div class="bg-laravel  p-6 border-2 border-amber-400">
+    <div class="bg-laravel  p-6 border-2 border-accent">
         <i class="fa-solid fa-shopping-cart"></i>
         @foreach ((array)$data as $pair)
             @foreach((array)$pair as $amount=>$details)
@@ -40,16 +40,16 @@
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name ="name" @auth value={{auth()->user()->name}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
+            <input type="text" name ="name" @auth value={{auth()->user()->name}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-start hover:shadow-lg p-2">
             <label for="email">Email</label>
             @error('email')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="email" name="email" @auth value={{auth()->user()->email}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
+            <input type="email" name="email" @auth value={{auth()->user()->email}}@endauth class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-start hover:shadow-lg p-2">
             <label for="address">Adresa</label>
-            <input type="text" name="address" id="address" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
+            <input type="text" name="address" id="address" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-start hover:shadow-lg p-2">
             @error('address')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
@@ -61,20 +61,23 @@
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name="invoiceName" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
+            <input type="text" name="invoiceName" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-start hover:shadow-lg p-2">
             <label for="invoiceAddress">Fakturační adresa</label>
             @error('invoiceAddress')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
                 </p>   
                 @enderror
-            <input type="text" name="invoiceAddress" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
-            <label class="bg-gray-200 rounded-t border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mt-6">
-                <input type="radio"  name="payment_method" value="card">
+            <input type="text" name="invoiceAddress" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-start hover:shadow-lg p-2">
+            <label class="bg-gray-200 rounded-t border-2 p-2 hover:bg-gray-300 hover:shadow-lg flex-row flex justify-start mt-6">
+                <input type="radio"  name="payment_method" value="card" disabled="disabled">
                 <div class="ml-6">
                     <h1 class="text-xl">
                         Online
                     </h1>
+                    <div class="text-red-700">
+                        Online platba je zatím vypnuta
+                    </div>
                     <div class="text-gray-700">
                         Online platba kartou, Google pay, nebo Apple pay přes Stripe
                     </div>
@@ -96,7 +99,7 @@
                     {{$message}}
                 </p>   
             @enderror
-            <input type="submit" class="h-10 text-white rounded-lg bg-laravel hover:bg-gold" value="Vytvořit objednávku">
+            <input type="submit" class="h-10 text-black rounded-lg bg-laravel hover:bg-gold hover:shadow-lg hover:cursor-pointer" value="Vytvořit objednávku">
         </form>
     </div>
 </div>
