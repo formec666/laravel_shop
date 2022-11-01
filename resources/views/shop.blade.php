@@ -50,15 +50,15 @@ E-shop
      $tags = explode(',', $product['tags']);   
     @endphp
     
-    <div class=" bg-gray-50 border border-gray-200 rounded p-6">
-        
+    <div href="product{{$product['id']}}" class=" bg-gray-50 border border-gray-200 rounded p-6">
+        <a href="/products/{{$product['id']}}">
         <div class="grid place-items-center text-center" >
             <img
                 class="w-48 md:center"
                 src="{{$product->image ? asset('storage/'.$product->image): asset('\images\2.jpg')}}"
                 alt=""
             />
-            <a href="products/{{$product['id']}}"><div>
+            <div>
                 <h3 class="text-2xl ">
                    {{$product['name']}}
                 </h3>
@@ -75,9 +75,9 @@ E-shop
                 <div class="text-lg mt-4">
                     <i class="fa-solid fa-location-dot"></i> {{$product->available}}
                 </div>
-            </div></a>
+            </div>
         </div>
-        
+    </a>
     </div>
     @endforeach
     
