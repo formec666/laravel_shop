@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\StorageController;
+@endphp
+
 @extends('layout')
 
 @section('title')
@@ -34,7 +38,7 @@
                             @endforeach
                         </ul>
                         <div class="text-lg my-4">
-                            <i class="fa-solid fa-location-dot"></i> Daytona, FL
+                            <i class="fa-solid fa-location-dot"></i> {{StorageController::getTotal($product->item)}}
                         </div>
                         <form class="flex flex-col justify-center " action="/cart/add">
                             
