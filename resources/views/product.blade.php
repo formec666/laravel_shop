@@ -34,7 +34,7 @@
                             @endforeach
                         </ul>
                         <div class="text-lg my-4">
-                            <i class="fa-solid fa-location-dot"></i> Daytona, FL
+                            <i class="fa-solid fa-location-dot"></i> {{$product->available}}
                         </div>
                         <form class="flex flex-col justify-center " action="/cart/add">
                             
