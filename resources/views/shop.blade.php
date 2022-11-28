@@ -1,3 +1,7 @@
+@php
+    use App\Http\Controllers\StorageController;
+@endphp
+
 @extends('layout')
 
 @section('title')
@@ -73,7 +77,7 @@ E-shop
                     @endforeach
                 </ul>
                 <div class="text-lg mt-4">
-                    <i class="fa-solid fa-location-dot"></i> {{$product->available}}
+                    <i class="fa-solid fa-location-dot"></i> {{StorageController::getStatus($product->item)}}
                 </div>
             </div>
         </div>

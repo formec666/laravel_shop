@@ -25,6 +25,17 @@ class StorageController extends Controller
         return $total;
     }
 
+    public function getStatus($item){
+        if ($item == null){
+            return 'Dostupnost neznámá';
+        }
+        $total = StorageController::getTotal($item);
+        if ($total == 0) {
+            return 'Momentálně nedostupné';
+        }
+        return ('Skladem '.$total.' kusů');
+    }
+
     public function mainStorage(){
         $items=Item::all();
         foreach($items as $item){
@@ -32,6 +43,7 @@ class StorageController extends Controller
         }
         return view('admin.storage.main', ['items'=>$items]);
     }
+
 
     public function spaces(){
         return view('admin.storage.spaces', ['spaces'=>StorageSpace::all()]);

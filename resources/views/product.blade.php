@@ -38,11 +38,11 @@
                             @endforeach
                         </ul>
                         <div class="text-lg my-4">
-                            <i class="fa-solid fa-location-dot"></i> {{StorageController::getTotal($product->item)}}
+                            <i class="fa-solid fa-location-dot"></i> {{StorageController::getStatus($product->item)}}
                         </div>
                         <form class="flex flex-col justify-center " action="/cart/add">
                             
-                            <input type="number" name="amount" id="amount" class="m-6 flex flex-col text-center p-1" value="1" min="1" >
+                            <input type="number" name="amount" id="amount" class="m-6 flex flex-col text-center p-1 border-2 rounded-xl" value="1" min="1" >
                             <button
                                     type="submit"  
                                     class="block bg-laravel  py-2 rounded-xl hover:opacity-80 p-6"
