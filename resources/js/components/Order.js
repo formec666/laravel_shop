@@ -104,6 +104,9 @@ function Order(props){
                     {props.order.invoiceAddress && <><div className='font-light'>Adresa na fakturu</div>
                     <div className='font-medium'>{props.order.invoiceAddress}</div></>}
                     
+                    {props.order.note && <><div className='font-light'>Poznámka k obědnávce</div>
+                    <div className='font-medium'>{props.order.note}</div></>}
+                    
                     
                 </div>
                 <div>

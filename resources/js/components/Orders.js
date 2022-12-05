@@ -13,7 +13,7 @@ function Orders(props){
     const[time, setTime]=useState(Date.now());
 
     useEffect(() => {
-        const interval = setInterval(() => setTime(Date.now()), 1000);
+        const interval = setInterval(() => setTime(Date.now()), 5000);
         return () => {
           clearInterval(interval);
         };
@@ -37,6 +37,7 @@ function Orders(props){
         const movies = await response.json();
 
         setOrders(movies.orders);
+        getOrders(filtersString());
         
     }
     
