@@ -27,15 +27,19 @@
                         <div class="text-xl font-bold mb-4">{{$product['price']}} Kč</div>
                         <ul class="flex">
                             @php
+                                $tags = 'hello';
                                 $tags=explode(',', $product['tags'])
                             @endphp
-                            @foreach($tags as $tag)
-                            <li
+                            @if($tags != 'hello')
+                              @foreach($tags as $tag)
+                                <li
                                 class="flex items-center justify-center bg-black text-white rounded-xl py-1 px-3 mr-2 text-xs"
-                            >
-                                <a href="/?tags={{$tag}}">{{$tag}}</a>
-                            </li>
-                            @endforeach
+                                >   
+                                  <a href="/?tags={{$tag}}">{{$tag}}</a>
+                                </li>
+                            @endforeach  
+                            @endif
+                            
                         </ul>
                         <div class="text-lg my-4">
                             <i class="fa-solid fa-location-dot"></i> {{StorageController::getStatus($product->item)}}
