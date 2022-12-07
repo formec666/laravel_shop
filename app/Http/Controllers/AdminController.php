@@ -2,10 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Order;
 use App\Models\orderArchive;
 use App\Models\Product;
+use App\Models\Storage;
+use GuzzleHttp\Psr7\Message;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
+use Mail;
+use Stripe\StripeClient;
 
 class AdminController extends Controller
 {
@@ -24,7 +31,7 @@ class AdminController extends Controller
     {
         $orders=Order::oldest()->filter(request(['status', 'search']))->/*where('taken_by', auth()->user()->id)->*/orWhere('taken_by', null)->get();
         foreach($orders as $order){
-            $order['payment_status']=OrderController::getOrderPayment($order->payment_method);
+            $order['payment_status']=OrderController::getOrderPayment($order->payment_method, $order->payment_params);
         }
         return response()->json(['orders'=>$orders]);
     }
@@ -40,6 +47,9 @@ class AdminController extends Controller
             
         }
         $order->update($fields);
+        if ($request['to']==1) {
+        Mail::to($order->email)->send(new \App\Mail\OrderAccept($order));
+        }
             
         }
         elseif($request['to']==6){
@@ -54,6 +64,8 @@ class AdminController extends Controller
             $orderArchive->status=$order['id'];
             $orderArchive->archived_by=auth()->user()->id;
             $orderArchive->payment_method=$order['payment_method'];
+            $orderArchive->note=$order['note'];
+            $orderArchive->payment_params=$order['payment_params'];
             $orderArchive->save();
             $order->delete();
         }
@@ -61,6 +73,7 @@ class AdminController extends Controller
             'status'=>6];
             $order->update($fields);
         }
+        
         return true;
     }
     

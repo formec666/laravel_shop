@@ -26,5 +26,9 @@
         @else
             Způsob platby: {{$payment}}
         @endif
+        @if($order->payment_method == 'transfer')
+            Pro platbu můžete použít i QR code:
+            <img src="/storage/logos/qr-code.jpg">
+        @endif
         
     @endsection

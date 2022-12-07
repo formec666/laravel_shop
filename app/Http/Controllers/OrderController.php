@@ -46,7 +46,7 @@ class OrderController extends Controller
             return redirect('/')->with('message', 'Objednávka nebyla vytvořena, košík je prázdný');
         }
         //dd($request);
-
+        $payment = $formFields['payment_method'];
             $response=array();
             $line_items=array();
         
@@ -80,8 +80,13 @@ class OrderController extends Controller
                     'success_url'=>'http://127.0.0.1:8000/',
                     'cancel_url'=>'http://127.0.0.1:8000/'
                 ]);
-                $formFields['payment_method']=$checkout_session->id;
+                $formFields['payment_params']=$checkout_session->id;
                 $url=$checkout_session->url;
+                $payment=$formFields['payment_params'];
+            }
+            elseif ($request->payment_method == "transfer") {
+                $formFields['payment_params'] = Order::latest()->first()->id + 1;
+                $payment = 'Proveďte platbu s variabilním symbolem '.$formFields['payment_params']. ' na účet 4861723073/0800';
             }
         
         $formFields['cart']=json_encode($response);
@@ -91,16 +96,20 @@ class OrderController extends Controller
         $request->session()->put('cart', []);
         $order=Order::create($formFields);
         Mail::to($order->email)->send(new \App\Mail\OrderCreate($order, $order->payment_method, $url));
-        return view('admin.mail', ['order'=>$order, 'payment'=>$order->payment_method, 'url'=>$url]);
+        
+        return view('admin.mail', ['order'=>$order, 'payment'=>$payment, 'url'=>$url]);
     }
 
-    public function getOrderPayment($payment_method){
+    public function getOrderPayment($payment_method, $payment_params){
         if($payment_method=='Dobírka' || $payment_method=='post'){
             return 'Platbla dobírkou';
         }
-        else{
+        else if($payment_method=='transfer'){
+            return 'var. symbol: '.$payment_params;
+        }
+        else if($payment_method=='card'){
             $stripe=new \Stripe\StripeClient(env('STRIPE_KEY'));
-            $session=$stripe->checkout->sessions->retrieve($payment_method);
+            $session=$stripe->checkout->sessions->retrieve($payment_params);
             //dd($session);
             switch ($session->payment_status){
                 
@@ -142,7 +151,9 @@ class OrderController extends Controller
         'invoiceAddress'=>$order->invoiceAddress,
         'status'=>0,
         'email'=>$order->email,
-        'payment_method'=>$order->payment_method 
+        'payment_method'=>$order->payment_method,
+        'note'=>$order->note,
+        'payment_params'=>$order->payment_params
     ];
         Order::create($data);
         $order->delete();

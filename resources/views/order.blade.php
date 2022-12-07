@@ -93,7 +93,7 @@
                     </div>
                 </div>
             </label>
-            <label class="bg-gray-200 rounded-b border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mb-6">
+            <label class="bg-gray-200 rounded-b border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start">
                 <input type="radio"  name="payment_method" value="Dobírka">
                 <div class="ml-6">
                     <h1 class="text-xl  ">
@@ -101,6 +101,17 @@
                     </h1>
                     <div class="text-gray-700">
                         Zaplatíte hotově
+                    </div>
+                </div>
+            </label>
+            <label class="bg-gray-200 rounded-b border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mb-6">
+                <input type="radio"  name="payment_method" value="transfer">
+                <div class="ml-6">
+                    <h1 class="text-xl  ">
+                        Převodem na účet
+                    </h1>
+                    <div class="text-gray-700">
+                        Zaplatíte převodem na účet, vyřízení může trvat déle
                     </div>
                 </div>
             </label>
