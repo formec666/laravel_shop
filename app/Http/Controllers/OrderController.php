@@ -142,7 +142,8 @@ class OrderController extends Controller
         'invoiceAddress'=>$order->invoiceAddress,
         'status'=>0,
         'email'=>$order->email,
-        'payment_method'=>$order->payment_method 
+        'payment_method'=>$order->payment_method,
+        'note'=>$order->note
     ];
         Order::create($data);
         $order->delete();
