@@ -71,7 +71,7 @@
                 @enderror
             <input type="text" name="invoiceAddress" class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             
-            <label for="note">Poznámky k obědnávce</label>
+            <label for="note">Poznámky k objednávce</label>
             @error('note')
                  <p class="text-red-500 text-xs mt-1">
                     {{$message}}
@@ -80,7 +80,7 @@
             <input type = 'textField' name = 'note' class="w-full bg-white border-solid border-2 border-grey-500 rounded-md text-center p-2">
             
             <label class="bg-gray-200 rounded-t border-2 p-2 hover:bg-gray-300 hover:shadow-lg hover:cursor-pointer flex-row flex justify-start mt-6">
-                <input type="radio"  name="payment_method" value="card">
+                <input type="radio"  name="payment_method" value="card" disabled="disabled">
                 <div class="ml-6">
                     <h1 class="text-xl">
                         Online
