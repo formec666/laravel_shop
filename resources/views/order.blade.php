@@ -85,6 +85,9 @@
                     <h1 class="text-xl">
                         Online
                     </h1>
+                    <div class="text-red-500">
+                        Platba kartou zatím není možná
+                    </div>
                     <div class="text-gray-700">
                         Online platba kartou, Google pay, nebo Apple pay přes Stripe
                     </div>
