@@ -40,7 +40,8 @@ class OrderController extends Controller
             'total'=>['required', 'numeric'],
             'cart'=>[],
             'payment_method'=>'required',
-            'note'=>[]
+            'note'=>[],
+            'phone'=>'required|numeric|digits:9'
         ]);
         if($formFields['total']==0){
             return redirect('/')->with('message', 'Objednávka nebyla vytvořena, košík je prázdný');

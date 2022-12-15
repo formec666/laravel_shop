@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateArchive extends Migration
+class AddPhoneToOrders extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class UpdateArchive extends Migration
      */
     public function up()
     {
-        Schema::table('order_archive', function (Blueprint $table) {
-            $table->text('note')->nullable();
-            $table->string('payment_params')->nullable();//
-        });//
+        Schema::table('orders', function (Blueprint $table) {
+            $table->string('phone')->nullable();//
+        });
     }
 
     /**
@@ -26,6 +25,8 @@ class UpdateArchive extends Migration
      */
     public function down()
     {
-        //
+        Schema::table('orders', function (Blueprint $table) {
+            //
+        });
     }
 }

@@ -106,6 +106,12 @@ function Order(props){
                     
                     {props.order.note && <><div className='font-light'>Poznámka k obědnávce</div>
                     <div className='font-medium'>{props.order.note}</div></>}
+
+                    <><div className='font-light'>Email</div>
+                    <div className='font-medium'>{props.order.email}</div></>
+
+                    <><div className='font-light'>Telefon</div>
+                    <div className='font-medium'><a href={'tel:'+props.order.phone}>{props.order.phone}</a></div></>
                     
                     
                 </div>
